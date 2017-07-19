@@ -23,14 +23,13 @@ public class RadiusBackgroundSpan extends ReplacementSpan {
      * @param color     背景颜色
      * @param textColor  文字颜色
      * @param radius    圆角半径
-     * @param v
-     * @param scale     倍数
+     * @param baseTextSize baseTextSize
      */
-    public RadiusBackgroundSpan(int color, int textColor, int radius,  float scale,int v) {
+    public RadiusBackgroundSpan(int color, int textColor, int radius,int baseTextSize) {
         mColor = color;
         mRadius = radius;
         mTextColor= textColor;
-        height = v;
+        height = baseTextSize;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class RadiusBackgroundSpan extends ReplacementSpan {
 
     @Override
     public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, Paint paint) {
-        int color = paint.getColor();//保存文字颜色
+
         paint.setColor(mColor);//设置背景颜色
         paint.setAntiAlias(true);// 设置画笔的锯齿效果
 
@@ -57,7 +56,7 @@ public class RadiusBackgroundSpan extends ReplacementSpan {
         float v1 = height - v;  //这个是后面的字体的大小的高度 -  这个画上的字体的大小的高度  这个地方要设置圆角居中显示
 
         //left  top  right  bottom    y + paint.ascent()  (float) (y + (paint.descent() * mScale))-7
-        RectF oval = new RectF(x, y + paint.ascent() - v1/ 2, x + mSize, y + paint.descent()- v1/ 2);
+        RectF oval = new RectF(x, y + paint.ascent() - v1 , x + mSize, y + paint.descent());
         //设置文字背景矩形，x为span其实左上角相对整个TextView的x值，y为span左上角相对整个View的y值。paint.ascent()获得文字上边缘，paint.descent()获得文字下边缘
         canvas.drawRoundRect(oval, mRadius, mRadius, paint);//绘制圆角矩形，第二个参数是x半径，第三个参数是y半径
         paint.setColor(mTextColor);//恢复画笔的文字颜色
