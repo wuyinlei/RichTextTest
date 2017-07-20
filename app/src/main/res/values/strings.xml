@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RichTextTest</string>
+    <string name="dynamic">动态</string>
+    <string name="tip_des">这个只是一个错误的演示，一行的时候可能看不出什么太大的差异，但是超过一行就会有差异了，不信你看看</string>
+    <string name="correct_tip">正确的显示</string>
+    <string name="error_tip">错误的显示</string>
 </resources>
